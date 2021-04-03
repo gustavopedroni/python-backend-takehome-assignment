@@ -12,6 +12,7 @@ requests = "*"
 starlette = "*"
 
 [dev-packages]
+ipython = "==5.10.0"
 
 [requires]
 python_version = "3.9"
