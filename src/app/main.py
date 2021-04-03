@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.resources.risk_profile import risk_profile_resource
 
-
 app = FastAPI()
 
 app.add_middleware(
