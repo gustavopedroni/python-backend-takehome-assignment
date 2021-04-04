@@ -1,13 +1,13 @@
 from enum import Enum
-
+from typing import Optional
 from pydantic import BaseModel
 
 
 class ScoreEnum(str, Enum):
-    economic = 'economic'
-    regular = 'regular'
-    responsible = 'responsible'
-    ineligible = 'ineligible'
+    ECONOMIC = 'economic'
+    REGULAR = 'regular'
+    RESPONSIBLE = 'responsible'
+    INELIGIBLE = 'ineligible'
 
 
 class RiskFinalScoreSchema(BaseModel):
@@ -18,7 +18,7 @@ class RiskFinalScoreSchema(BaseModel):
 
 
 class RiskNumberScoreSchema(BaseModel):
-    auto: int
-    disability: int
-    home: int
-    life: int
+    auto: Optional[int] = None
+    disability: Optional[int] = None
+    home: Optional[int] = None
+    life: Optional[int] = None
