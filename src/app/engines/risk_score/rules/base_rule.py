@@ -6,21 +6,42 @@ from app.data.schemas.risk_score import score
 
 class BaseRiskScoreRule(ABC):
 
-    key: str
+    key: ''
 
     def __init__(self, user_data: personal_information.PersonalInformationSchema):
 
         self.user_data = user_data
-        self._score = 0
+
+        self._base_score: int = sum(user_data.risk_questions)
+        self._num_score: int = self._base_score
+        self._final_score: score.ScoreEnum = score.ScoreEnum.INELIGIBLE
 
     @abstractmethod
-    def calculate(self) -> score.ScoreEnum:
-        return score.ScoreEnum.ineligible
+    def calculate(self):
+        pass
 
     @property
-    def score(self):
-        return self._score
+    def num_score(self):
+        return self._num_score
 
-    @score.setter
-    def score(self, value):
-        raise ValueError('Score cannot be changed in runtime execution!')
+    @num_score.setter
+    def num_score(self, value):
+        raise ValueError('Score cannot be changed in outside of rules!')
+
+    @property
+    def final_score(self):
+
+        if not isinstance(self.num_score, int):
+            return score.ScoreEnum.INELIGIBLE
+        elif self.num_score <= 0:
+            return score.ScoreEnum.ECONOMIC
+        elif self.num_score in [1, 2]:
+            return score.ScoreEnum.REGULAR
+        elif self.num_score >= 3:
+            return score.ScoreEnum.RESPONSIBLE
+        else:
+            return score.ScoreEnum.INELIGIBLE
+
+    @final_score.setter
+    def final_score(self, value):
+        raise ValueError('Score cannot be changed in outside of rules!')
