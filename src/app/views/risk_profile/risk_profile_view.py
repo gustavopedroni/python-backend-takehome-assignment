@@ -10,7 +10,7 @@ router = APIRouter()
 @router.post("/", status_code=201, response_model=score.RiskFinalScoreSchema)
 async def post(user_data: p_info.PersonalInformationSchema):
 
-    risk_score_engine = RiskScoreEngine(user_data=user_data)
-    risk_score = risk_score_engine.calculate()
+    risk_score_engine = RiskScoreEngine()
+    risk_score_final, _ = risk_score_engine.calculate(user_data=user_data)
 
-    return risk_score
+    return risk_score_final
