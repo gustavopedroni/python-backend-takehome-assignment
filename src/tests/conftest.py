@@ -1,7 +1,8 @@
 import pytest
 from starlette.testclient import TestClient
 
-from app.data.schemas.risk_profile import personal_information as p_info
+from app.data.schemas.personal.information import PersonalInformationSchema
+from app.engines.insurances.insurances_engine import InsurancesEngine
 from app.main import app
 
 
@@ -26,7 +27,7 @@ def user_common_data_dict():
 
 @pytest.fixture
 def user_common_data(user_common_data_dict):
-    return p_info.PersonalInformationSchema(**user_common_data_dict)
+    return PersonalInformationSchema(**user_common_data_dict)
 
 
 @pytest.fixture
@@ -41,7 +42,7 @@ def user_mixed_data():
         "vehicle": {"year": 2018}
     }
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
@@ -49,7 +50,7 @@ def user_data_without_income(user_common_data_dict):
 
     user_data = {**user_common_data_dict, "income": 0}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
@@ -57,7 +58,7 @@ def user_data_without_vehicle(user_common_data_dict):
 
     user_data = {**user_common_data_dict, "vehicle": None}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
@@ -65,60 +66,65 @@ def user_data_without_house(user_common_data_dict):
 
     user_data = {**user_common_data_dict, "house": None}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_age_over_60_years(user_common_data_dict):
     user_data = {**user_common_data_dict, "age": 65}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_age_under_30_years(user_common_data_dict):
     user_data = {**user_common_data_dict, "age": 29}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_age_between_30_40_years(user_common_data_dict):
     user_data = {**user_common_data_dict, "age": 35}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_income_above_200k(user_common_data_dict):
     user_data = {**user_common_data_dict, "income": 250000}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_house_mortgaged(user_common_data_dict):
     user_data = {**user_common_data_dict, "house": {"ownership_status": "mortgaged"}}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_with_dependents(user_common_data_dict):
     user_data = {**user_common_data_dict, "dependents": 1}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_married(user_common_data_dict):
     user_data = {**user_common_data_dict, "marital_status": "married"}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
 
 
 @pytest.fixture
 def user_data_vehicle_last_5_years(user_common_data_dict):
     user_data = {**user_common_data_dict, "vehicle": {"year": 2018}}
 
-    return p_info.PersonalInformationSchema(**user_data)
+    return PersonalInformationSchema(**user_data)
+
+
+@pytest.fixture
+def insurances_engine():
+    return InsurancesEngine()

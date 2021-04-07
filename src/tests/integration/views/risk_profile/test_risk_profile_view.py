@@ -2,11 +2,14 @@ import json
 
 import pytest
 
-from app.engines.risk_score import risk_score_engine
+from app.engines.insurances import insurances_engine
 
 
 def test_post_risk_profile_response(test_app, mocker, user_common_data_dict):
-    spy_calculate = mocker.spy(risk_score_engine.RiskScoreEngine, 'calculate')
+    """Tests if the InsurancesEngine.calculate method is called
+       and if the data is returned in the correct structure
+    """
+    spy_calculate = mocker.spy(insurances_engine.InsurancesEngine, 'calculate')
 
     response = test_app.post("/v1/risk_profile/", data=json.dumps(user_common_data_dict))
 
@@ -37,6 +40,8 @@ def test_post_risk_profile_response(test_app, mocker, user_common_data_dict):
     ]
 )
 def test_invalid_response_fields(field, value, user_common_data_dict, test_app):
+    """Test if all field have the correct type validation
+    """
 
     user_data = user_common_data_dict.copy()
     user_data[field] = value

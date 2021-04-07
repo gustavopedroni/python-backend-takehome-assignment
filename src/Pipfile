@@ -12,11 +12,12 @@ pydantic = "*"
 uvicorn = "*"
 pytest = "*"
 pytest-mock = "*"
+pytest-lazy-fixture = "*"
 requests = "*"
 starlette = "*"
 
 [dev-packages]
-ipython = "==5.10.0"
+ipython = "*"
 
 [requires]
 python_version = "3.9"
