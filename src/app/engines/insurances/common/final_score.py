@@ -3,6 +3,8 @@ from .risk_score import RiskScore
 
 
 class FinalScore(RiskScore):
+    """Apply a business rule, mapping the score to its respective FinalScore type
+    """
 
     def get_final_score(self) -> FinalScoreEnum:
 

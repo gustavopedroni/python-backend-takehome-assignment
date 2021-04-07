@@ -1,4 +1,6 @@
 import pytest
+from pytest_lazyfixture import lazy_fixture
+
 
 from app.data.contants.insurances_line import InsurancesLineKey
 from app.engines.insurances.lines.rules import house, vehicle, personal
@@ -7,9 +9,9 @@ from app.engines.insurances.lines.rules import house, vehicle, personal
 @pytest.mark.parametrize(
     'rule_class, line_key, user_data',
     [
-        (house.NotHaveHouseRule, InsurancesLineKey.HOME, pytest.lazy_fixture('user_data_without_house')),
-        (personal.NotHaveIncomeRule, InsurancesLineKey.DISABILITY, pytest.lazy_fixture('user_data_without_income')),
-        (vehicle.NotHaveVehicleRule, InsurancesLineKey.AUTO, pytest.lazy_fixture('user_data_without_vehicle')),
+        (house.NotHaveHouseRule, InsurancesLineKey.HOME, lazy_fixture('user_data_without_house')),
+        (personal.NotHaveIncomeRule, InsurancesLineKey.DISABILITY, lazy_fixture('user_data_without_income')),
+        (vehicle.NotHaveVehicleRule, InsurancesLineKey.AUTO, lazy_fixture('user_data_without_vehicle')),
     ]
 )
 def test_dont_have_rule(rule_class, line_key, user_data, risk_score):
@@ -66,7 +68,7 @@ def test_age_over_60_years(risk_score, user_data_age_over_60_years):
 
 
 def test_age_under_30_years(risk_score, user_data_age_under_30_years):
-    """Test if the YoungAgeRule reduce 2 point on score in all lines
+    """Test if the YoungAgeRule reduces 2 point on score in all lines
     """
 
     for key in tuple(InsurancesLineKey):
@@ -81,7 +83,7 @@ def test_age_under_30_years(risk_score, user_data_age_under_30_years):
 
 
 def test_age_between_30_40_years(risk_score, user_data_age_between_30_40_years):
-    """Test if the AdultAgeRule reduce 1 point on score in all lines
+    """Test if the AdultAgeRule reduces 1 point on score in all lines
     """
 
     for key in tuple(InsurancesLineKey):
@@ -96,7 +98,7 @@ def test_age_between_30_40_years(risk_score, user_data_age_between_30_40_years):
 
 
 def test_income_above_200k(risk_score, user_data_income_above_200k):
-    """Test if the HighIncomeRule reduce 1 point on score in all lines
+    """Test if the HighIncomeRule reduces 1 point on score in all lines
     """
 
     for key in tuple(InsurancesLineKey):
@@ -167,7 +169,7 @@ def test_has_dependents(risk_score, user_data_with_dependents):
 
 
 def test_is_married(risk_score, user_data_married):
-    """Tests if the MarriedRule adds 1 point on LIFE line and reduce 1 point on DISABILITY line
+    """Tests if the MarriedRule adds 1 point on LIFE line and reduces 1 point on DISABILITY line
        but only changes the score on them
     """
 

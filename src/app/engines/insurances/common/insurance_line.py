@@ -1,4 +1,4 @@
-from typing import Type, Tuple
+from typing import Type, Iterable
 
 from app.engines.insurances.common.base.base_insurance_line import BaseInsuranceLine
 from app.engines.insurances.common.base.base_rule import BaseRule
@@ -7,7 +7,7 @@ from .final_score import FinalScore
 
 class InsuranceLine(BaseInsuranceLine, FinalScore):
 
-    rules: Tuple[Type[BaseRule]]
+    rules: Iterable[Type[BaseRule]]
 
     def __init__(self, *args, **kwargs):
 
@@ -17,6 +17,8 @@ class InsuranceLine(BaseInsuranceLine, FinalScore):
         self.num_score = self.base_score
 
     def calculate(self):
+        """Go through all the rules to find a score
+        """
 
         for r in self.rules:
 

@@ -9,6 +9,10 @@ router = APIRouter()
 
 @router.post("/", status_code=201, response_model=FinalRiskScoreSchema)
 async def post(user_data: PersonalInformationSchema):
+    """calculates the risk for a given user profile
+    :param user_data: PersonalInformationSchema
+    :return: FinalRiskScoreSchema
+    """
 
     insurances_engine = InsurancesEngine()
     final_score, _ = insurances_engine.calculate(user_data=user_data)
