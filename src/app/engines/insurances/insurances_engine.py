@@ -1,4 +1,4 @@
-from typing import Optional, Type, Iterable, Tuple
+from typing import Iterable, Optional, Tuple, Type
 
 from app.data.schemas.personal.information import PersonalInformationSchema
 from app.data.schemas.score import FinalRiskScoreSchema, NumberRiskScoreSchema
@@ -7,25 +7,24 @@ from app.engines.insurances.common.insurance_line import InsuranceLine
 
 
 class InsurancesEngine:
+    def __init__(
+        self, insurances_lines: Optional[Iterable[Type[InsuranceLine]]] = None
+    ):
 
-    def __init__(self, insurances_lines: Optional[Iterable[Type[InsuranceLine]]] = None):
-
-        self.insurances_lines = insurances_lines \
-            if insurances_lines \
+        self.insurances_lines = (
+            insurances_lines
+            if insurances_lines
             else (
                 lines.LifeInsuranceLine,
                 lines.DisabilityInsuranceLine,
                 lines.HomeInsuranceLine,
                 lines.AutoInsuranceLine,
             )
+        )
 
     def calculate(
-        self,
-        user_data: PersonalInformationSchema
-    ) -> Tuple[
-        FinalRiskScoreSchema,
-        NumberRiskScoreSchema,
-    ]:
+        self, user_data: PersonalInformationSchema
+    ) -> Tuple[FinalRiskScoreSchema, NumberRiskScoreSchema]:
         """Calculates the score for each of the insurance lines
         :param user_data: PersonalInformation
         :return: FinalRiskScoreSchema, NumberRiskScoreSchema
@@ -43,5 +42,5 @@ class InsurancesEngine:
 
         return (
             FinalRiskScoreSchema(**response_final),
-            NumberRiskScoreSchema(**response_number)
+            NumberRiskScoreSchema(**response_number),
         )

@@ -15,4 +15,3 @@ COPY Pipfile Pipfile.lock /usr/src/
 RUN pipenv install --system --dev
 
 COPY . /usr/src/
-

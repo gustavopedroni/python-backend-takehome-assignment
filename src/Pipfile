@@ -18,6 +18,8 @@ starlette = "*"
 
 [dev-packages]
 ipython = "*"
+pre-commit = "*"
+mypy = "*"
 
 [requires]
 python_version = "3.9"

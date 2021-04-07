@@ -9,7 +9,11 @@ class BaseInsuranceLine(ABC):
 
     key: InsurancesLineKey
 
-    def __init__(self, user_data: PersonalInformationSchema, key: Optional[InsurancesLineKey] = None):
+    def __init__(
+        self,
+        user_data: PersonalInformationSchema,
+        key: Optional[InsurancesLineKey] = None,
+    ):
         self.user_data = user_data
         self.key = key if key else self.key
 

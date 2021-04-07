@@ -2,14 +2,13 @@ from app.data.contants.insurances_line import InsurancesLineKey
 from app.engines.insurances.common.base.base_rule import BaseRule
 
 __all__ = (
-    'OldAgeRule',
-    'AdultAgeRule',
-    'YoungAgeRule',
+    "OldAgeRule",
+    "AdultAgeRule",
+    "YoungAgeRule",
 )
 
 
 class OldAgeRule(BaseRule):
-
     def apply(self, data, score):
 
         if not isinstance(data.age, int):
@@ -17,17 +16,20 @@ class OldAgeRule(BaseRule):
 
         age: int = data.age
 
-        if self.line_key in (
-            InsurancesLineKey.DISABILITY,
-            InsurancesLineKey.LIFE,
-        ) and age > 60:
+        if (
+            self.line_key
+            in (
+                InsurancesLineKey.DISABILITY,
+                InsurancesLineKey.LIFE,
+            )
+            and age > 60
+        ):
             return None
 
         return score
 
 
 class AdultAgeRule(BaseRule):
-
     def apply(self, data, score):
 
         if not isinstance(data.age, int):
@@ -42,7 +44,6 @@ class AdultAgeRule(BaseRule):
 
 
 class YoungAgeRule(BaseRule):
-
     def apply(self, data, score):
 
         if not isinstance(data.age, int):

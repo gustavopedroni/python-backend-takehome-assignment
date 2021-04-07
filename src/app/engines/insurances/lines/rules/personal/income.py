@@ -2,13 +2,12 @@ from app.data.contants.insurances_line import InsurancesLineKey
 from app.engines.insurances.common.base.base_rule import BaseRule
 
 __all__ = (
-    'NotHaveIncomeRule',
-    'HighIncomeRule',
+    "NotHaveIncomeRule",
+    "HighIncomeRule",
 )
 
 
 class NotHaveIncomeRule(BaseRule):
-
     def apply(self, data, score):
 
         if self.line_key is InsurancesLineKey.DISABILITY and not data.income:
@@ -18,7 +17,6 @@ class NotHaveIncomeRule(BaseRule):
 
 
 class HighIncomeRule(BaseRule):
-
     def apply(self, data, score):
 
         if not isinstance(data.income, int):
@@ -30,4 +28,3 @@ class HighIncomeRule(BaseRule):
             return score - 1
 
         return score
-

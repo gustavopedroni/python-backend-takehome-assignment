@@ -1,8 +1,10 @@
-from typing import Type, Iterable
+from typing import Iterable, Type
 
-from app.engines.insurances.common.base.base_insurance_line import BaseInsuranceLine
+from app.engines.insurances.common.base.base_insurance_line import (
+    BaseInsuranceLine,
+)
 from app.engines.insurances.common.base.base_rule import BaseRule
-from .final_score import FinalScore
+from app.engines.insurances.common.final_score import FinalScore
 
 
 class InsuranceLine(BaseInsuranceLine, FinalScore):
@@ -17,10 +19,10 @@ class InsuranceLine(BaseInsuranceLine, FinalScore):
         self.num_score = self.base_score
 
     def calculate(self):
-        """Go through all the rules to find a score
-        """
+        """Go through all the rules to find a score"""
 
         for r in self.rules:
 
-            self.num_score = r(line_key=self.key) \
-                .check(data=self.user_data, score=self.num_score)
+            self.num_score = r(line_key=self.key).check(
+                data=self.user_data, score=self.num_score
+            )

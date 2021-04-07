@@ -1,7 +1,7 @@
 import pytest
 
 from app.engines.insurances import lines
-from app.engines.insurances.lines.rules import vehicle, personal, house
+from app.engines.insurances.lines.rules import house, personal, vehicle
 
 
 @pytest.mark.parametrize(
@@ -15,7 +15,7 @@ from app.engines.insurances.lines.rules import vehicle, personal, house
                 personal.AdultAgeRule,
                 personal.HighIncomeRule,
                 vehicle.VehicleProducedLast5YearsRule,
-            )
+            ),
         ),
         (
             lines.DisabilityInsuranceLine,
@@ -28,7 +28,7 @@ from app.engines.insurances.lines.rules import vehicle, personal, house
                 house.HouseMortgagedRule,
                 personal.HasDependentsRule,
                 personal.MarriedRule,
-            )
+            ),
         ),
         (
             lines.HomeInsuranceLine,
@@ -38,7 +38,7 @@ from app.engines.insurances.lines.rules import vehicle, personal, house
                 personal.AdultAgeRule,
                 personal.HighIncomeRule,
                 house.HouseMortgagedRule,
-            )
+            ),
         ),
         (
             lines.LifeInsuranceLine,
@@ -49,11 +49,10 @@ from app.engines.insurances.lines.rules import vehicle, personal, house
                 personal.HighIncomeRule,
                 personal.HasDependentsRule,
                 personal.MarriedRule,
-            )
-        )
-    ]
+            ),
+        ),
+    ],
 )
 def test_check_rules_insurance_line(line, rules):
-    """ Check if All Insurance Lines has all rules
-    """
+    """Check if All Insurance Lines has all rules"""
     assert all(r in line.rules for r in rules)

@@ -1,18 +1,20 @@
 import pytest
 
-
-from app.engines.insurances.common.final_score import FinalScore
 from app.data.contants.final_score import FinalScoreEnum
+from app.engines.insurances.common.final_score import FinalScore
 
 
 @pytest.mark.parametrize(
-    'value,response',
+    "value,response",
     (
-        (-100, FinalScoreEnum.ECONOMIC), (0, FinalScoreEnum.ECONOMIC),
-        (1, FinalScoreEnum.REGULAR), (2, FinalScoreEnum.REGULAR),
-        (3, FinalScoreEnum.RESPONSIBLE), (100, FinalScoreEnum.RESPONSIBLE),
-        (None, FinalScoreEnum.INELIGIBLE)
-    )
+        (-100, FinalScoreEnum.ECONOMIC),
+        (0, FinalScoreEnum.ECONOMIC),
+        (1, FinalScoreEnum.REGULAR),
+        (2, FinalScoreEnum.REGULAR),
+        (3, FinalScoreEnum.RESPONSIBLE),
+        (100, FinalScoreEnum.RESPONSIBLE),
+        (None, FinalScoreEnum.INELIGIBLE),
+    ),
 )
 def test_final_score(value, response, final_score: FinalScore):
     """Test if FinalScore respects the business rule

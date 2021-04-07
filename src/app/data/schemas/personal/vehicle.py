@@ -4,4 +4,4 @@ from pydantic.types import PositiveInt
 
 class VehicleSchema(BaseModel):
 
-    year: PositiveInt = Field(..., description='Year it was manufactured')
+    year: PositiveInt = Field(..., description="Year it was manufactured")

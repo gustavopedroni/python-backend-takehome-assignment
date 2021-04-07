@@ -1,6 +1,6 @@
 from app.data.contants import insurances_line
 from app.engines.insurances.common.insurance_line import InsuranceLine
-from app.engines.insurances.lines.rules import personal, house
+from app.engines.insurances.lines.rules import house, personal
 
 
 class HomeInsuranceLine(InsuranceLine):

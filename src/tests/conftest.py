@@ -21,7 +21,7 @@ def user_common_data_dict():
         "income": 1000,
         "marital_status": "single",
         "risk_questions": [0, 0, 0],
-        "vehicle": {"year": 2000}
+        "vehicle": {"year": 2000},
     }
 
 
@@ -39,7 +39,7 @@ def user_mixed_data():
         "income": 0,
         "marital_status": "married",
         "risk_questions": [0, 1, 0],
-        "vehicle": {"year": 2018}
+        "vehicle": {"year": 2018},
     }
 
     return PersonalInformationSchema(**user_data)

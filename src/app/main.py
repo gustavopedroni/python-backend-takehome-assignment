@@ -7,14 +7,12 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 app.include_router(
-    risk_profile_view.router,
-    prefix='/v1/risk_profile',
-    tags=['Risk Profile']
+    risk_profile_view.router, prefix="/v1/risk_profile", tags=["Risk Profile"]
 )

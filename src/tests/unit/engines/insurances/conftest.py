@@ -18,7 +18,4 @@ def final_score():
 
 @pytest.fixture
 def generic_insurance_line(user_common_data):
-    return InsuranceLine(
-        user_data=user_common_data,
-        key=InsurancesLineKey.GENERIC
-    )
+    return InsuranceLine(user_data=user_common_data, key=InsurancesLineKey.GENERIC)

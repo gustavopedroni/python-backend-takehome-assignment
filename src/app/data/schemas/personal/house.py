@@ -5,4 +5,6 @@ from pydantic import BaseModel, Field
 
 class HouseSchema(BaseModel):
 
-    ownership_status: Literal['owned', 'mortgaged'] = Field(..., description="Status can be 'owned' or 'mortgaged'")
+    ownership_status: Literal["owned", "mortgaged"] = Field(
+        ..., description="Status can be 'owned' or 'mortgaged'"
+    )

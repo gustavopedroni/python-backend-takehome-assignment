@@ -22,9 +22,10 @@ class BaseRule(ABC):
         """
         return score
 
-    def check(self, data: PersonalInformationSchema, score: Optional[int]) -> Optional[int]:
-        """Checks if there is a date and if the score is valid, after applying the current rule
-        """
+    def check(
+        self, data: PersonalInformationSchema, score: Optional[int]
+    ) -> Optional[int]:
+        """Checks if there is a date and if the score is valid, after applying the current rule"""
 
         if not data:
             return score
