@@ -1,6 +1,5 @@
 from app.data.schemas.score import FinalScoreEnum
-
-from .risk_score import RiskScore
+from app.engines.insurances.common.risk_score import RiskScore
 
 
 class FinalScore(RiskScore):

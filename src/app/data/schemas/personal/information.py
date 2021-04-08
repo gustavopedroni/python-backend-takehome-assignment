@@ -1,10 +1,9 @@
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 
 from pydantic import BaseModel, Field
 
-from .house import HouseSchema
-from .risk_questions import RiskQuestionsSchema
-from .vehicle import VehicleSchema
+from app.data.schemas.personal.house import HouseSchema
+from app.data.schemas.personal.vehicle import VehicleSchema
 
 
 class PersonalInformationSchema(BaseModel):
@@ -14,5 +13,5 @@ class PersonalInformationSchema(BaseModel):
     house: Optional[HouseSchema] = None
     income: int = Field(..., ge=0)
     marital_status: Literal["single", "married"]
-    risk_questions: RiskQuestionsSchema
+    risk_questions: List[bool] = Field(..., min_items=3, max_items=3)
     vehicle: Optional[VehicleSchema] = None
