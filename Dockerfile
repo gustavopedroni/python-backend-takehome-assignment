@@ -5,13 +5,15 @@ FROM python:3.9-alpine
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /usr/src
+WORKDIR /usr/app
 
 # Install dependencies
 RUN pip install pipenv
 
-COPY Pipfile Pipfile.lock /usr/src/
+COPY Pipfile Pipfile.lock /usr/app/
 
 RUN pipenv install --system --dev
 
-COPY . /usr/src/
+COPY . /usr/app/src
+
+WORKDIR /usr/app/src
